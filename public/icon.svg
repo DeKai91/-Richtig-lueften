@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="96" fill="#1976d2"/>
+  <!-- Stilisierte Luftströmung / Lüften -->
+  <g fill="none" stroke="#ffffff" stroke-width="34" stroke-linecap="round">
+    <path d="M120 196h180a44 44 0 1 0-44-44"/>
+    <path d="M120 286h240a48 48 0 1 1-48 48"/>
+    <path d="M120 376h150a40 40 0 1 1-40 40"/>
+  </g>
+</svg>

@@ -1,0 +1,234 @@
+/* Richtig Lüften – Styles
+   Modern, hell, viel Weißraum, abgerundete Karten, blaue Akzentfarbe (Material-Stil). */
+
+:root {
+  --blau: #1976d2;
+  --blau-hell: #e3f0fc;
+  --gruen: #2e7d32;
+  --gruen-bg: #e7f6e8;
+  --gelb: #f9a825;
+  --gelb-bg: #fff6e0;
+  --rot: #c62828;
+  --rot-bg: #fdeaea;
+  --text: #1f2933;
+  --text-leise: #6b7785;
+  --karte-bg: #ffffff;
+  --seite-bg: #f4f7fb;
+  --schatten: 0 2px 8px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.05);
+  --radius: 18px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  background: var(--seite-bg);
+  color: var(--text);
+  line-height: 1.5;
+}
+
+/* ---------- Kopfzeile ---------- */
+.kopf {
+  background: var(--blau);
+  color: #fff;
+  padding: env(safe-area-inset-top) 0 0;
+}
+.kopf-inhalt {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.kopf h1 { font-size: 1.35rem; margin: 0; font-weight: 600; }
+.icon-btn {
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  color: #fff;
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  display: grid; place-items: center;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.icon-btn:hover { background: rgba(255, 255, 255, 0.28); }
+
+/* ---------- Layout ---------- */
+.inhalt {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px 20px 48px;
+}
+.karten {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(3, 1fr); /* Desktop: drei nebeneinander */
+}
+@media (max-width: 800px) {
+  .karten { grid-template-columns: 1fr; } /* Mobile: untereinander */
+}
+
+/* ---------- Karte ---------- */
+.karte {
+  background: var(--karte-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--schatten);
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.karte-titel {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--blau);
+}
+
+/* ---------- Eingabefeld / Stepper ---------- */
+.feld { display: flex; flex-direction: column; gap: 6px; }
+.feld-label { font-size: 0.85rem; color: var(--text-leise); }
+.stepper {
+  display: grid;
+  grid-template-columns: 48px 1fr 48px;
+  align-items: stretch;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #dce3ec;
+}
+.stepper-btn {
+  border: none;
+  background: var(--blau-hell);
+  color: var(--blau);
+  font-size: 1.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+  user-select: none;
+}
+.stepper-btn:hover { background: #cfe4fa; }
+.stepper-btn:active { background: #b9d8f7; }
+.stepper-input {
+  border: none;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text);
+  width: 100%;
+  padding: 10px 0;
+  background: #fff;
+}
+.stepper-input:focus { outline: 2px solid var(--blau); outline-offset: -2px; }
+/* Spinner-Pfeile ausblenden */
+.stepper-input::-webkit-outer-spin-button,
+.stepper-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.stepper-input[type=number] { -moz-appearance: textfield; }
+
+/* ---------- Berechnete Werte ---------- */
+.trenner { height: 1px; background: #eef2f7; margin: 4px 0; }
+.wertzeile {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.wert-name { font-size: 0.85rem; color: var(--text-leise); }
+.wert-zahl { font-size: 1.35rem; font-weight: 700; }
+
+/* ---------- Wetterstation-Button ---------- */
+.abruf-btn {
+  background: var(--blau);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, opacity 0.15s;
+}
+.abruf-btn:hover { background: #1565c0; }
+.abruf-btn:disabled { opacity: 0.6; cursor: default; }
+.status { margin: 0; font-size: 0.82rem; min-height: 1.1em; color: var(--text-leise); }
+.status--ok { color: var(--gruen); }
+.status--fehler { color: var(--rot); }
+.status--laden { color: var(--blau); }
+
+/* ---------- Ergebniskarte ---------- */
+.ergebnis {
+  margin-top: 24px;
+  border-radius: var(--radius);
+  box-shadow: var(--schatten);
+  background: var(--karte-bg);
+  padding: 26px;
+  display: flex;
+  gap: 22px;
+  align-items: flex-start;
+  border-left: 8px solid #ccc;
+}
+.ergebnis--gruen { border-left-color: var(--gruen); background: var(--gruen-bg); }
+.ergebnis--gelb { border-left-color: var(--gelb); background: var(--gelb-bg); }
+.ergebnis--rot { border-left-color: var(--rot); background: var(--rot-bg); }
+.ergebnis-ampel {
+  width: 26px; height: 26px; border-radius: 50%;
+  flex: 0 0 auto; margin-top: 6px; background: #bbb;
+}
+.ergebnis--gruen .ergebnis-ampel { background: var(--gruen); }
+.ergebnis--gelb .ergebnis-ampel { background: var(--gelb); }
+.ergebnis--rot .ergebnis-ampel { background: var(--rot); }
+.ergebnis-inhalt { flex: 1; }
+.ergebnis-empfehlung { margin: 0 0 4px; font-size: 1.5rem; font-weight: 700; }
+.ergebnis-wasser { margin: 0 0 16px; font-size: 1.05rem; }
+.ergebnis-werte {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 16px;
+}
+@media (max-width: 600px) { .ergebnis-werte { grid-template-columns: 1fr; } }
+.ergebnis-werte div {
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 12px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+}
+.ergebnis-werte span { font-size: 0.8rem; color: var(--text-leise); }
+.ergebnis-werte strong { font-size: 1.3rem; }
+.ergebnis-erklaerung { margin: 0; font-size: 0.9rem; color: var(--text-leise); }
+@media (max-width: 600px) { .ergebnis { flex-direction: column; } }
+
+/* ---------- Dialog ---------- */
+.dialog {
+  border: none;
+  border-radius: var(--radius);
+  padding: 0;
+  max-width: 440px;
+  width: calc(100% - 32px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+}
+.dialog::backdrop { background: rgba(0, 0, 0, 0.4); }
+.dialog-form { padding: 24px; display: flex; flex-direction: column; gap: 18px; }
+.dialog-form h2 { margin: 0; color: var(--blau); font-size: 1.25rem; }
+.dialog-feld { display: flex; flex-direction: column; gap: 5px; }
+.dialog-feld span { font-weight: 600; font-size: 0.92rem; }
+.dialog-feld input {
+  padding: 10px 12px;
+  border: 1px solid #dce3ec;
+  border-radius: 10px;
+  font-size: 1rem;
+}
+.dialog-feld input:focus { outline: 2px solid var(--blau); outline-offset: -1px; }
+.dialog-feld small { color: var(--text-leise); font-size: 0.78rem; }
+.dialog-aktionen { display: flex; justify-content: flex-end; gap: 10px; margin-top: 4px; }
+.btn {
+  border: none;
+  border-radius: 10px;
+  padding: 10px 18px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn--primaer { background: var(--blau); color: #fff; }
+.btn--leise { background: #eef2f7; color: var(--text); }

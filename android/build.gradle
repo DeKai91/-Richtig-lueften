@@ -1,0 +1,4 @@
+// Wurzel-Build: definiert nur die verwendete Android-Gradle-Plugin-Version.
+plugins {
+    id 'com.android.application' version '8.5.2' apply false
+}

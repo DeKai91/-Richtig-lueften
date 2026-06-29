@@ -1,0 +1,33 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'de.sivaplan.richtiglueften'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId 'de.sivaplan.richtiglueften'
+        minSdk 26
+        targetSdk 34
+        versionCode 1
+        versionName '1.0'
+    }
+
+    buildTypes {
+        debug {
+            // Debug-Build: ohne eigene Signatur installierbar (aus unbekannter Quelle).
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+
+dependencies {
+    // Stellt den WebViewAssetLoader bereit (lädt die Web-App sicher per https-Origin,
+    // damit ES-Module und localStorage funktionieren).
+    implementation 'androidx.webkit:webkit:1.11.0'
+}
